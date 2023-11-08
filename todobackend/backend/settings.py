@@ -89,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-os.environ['DATABASE_URL'] = 'mysql://leetecht_todoapp:todoappPa$$w0rd@148.251.133.221:3306/leetecht_todoapp'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
