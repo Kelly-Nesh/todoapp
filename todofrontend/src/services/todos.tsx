@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const localhost = "http://192.168.109.53:8000/api/";
-const c = console.log;
+// const localhost = "http://192.168.109.53:8000/api/";
+const localhost = "https://todoappapi.leetech.top/api/";
+
 class TodoDataService {
   getAll(token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
@@ -18,7 +19,7 @@ class TodoDataService {
   }
   deleteTodo(id, token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    return axios.delete(localhost + id);
+    return axios.delete(localhost + 'todos/' + id);
   }
   completeTodo(id, token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;

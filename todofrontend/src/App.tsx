@@ -4,6 +4,7 @@ import { Link, Switch, Route } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Navbar";
+import Alert from "react-bootstrap/Alert";
 
 import "./App.css";
 import AddTodo from "./components/add-todo";
@@ -16,7 +17,6 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [error, setError] = useState("");
-  // const [alertClasses, setAlertClasses] = useState("d-none");
 
   const login = async (user = null) => {
     TodoDataService.login(user)
@@ -29,7 +29,6 @@ const App = () => {
       })
       .catch((e) => {
         console.log("login", e);
-        // setAlertClasses("alert alert-danger");
         setError(e.toString());
       });
   };
@@ -49,10 +48,9 @@ const App = () => {
       })
       .catch((e) => {
         console.log("signup", e);
-        // setAlertClasses("alert alert-danger");
         setError(e.toString());
       });
-    setUser(user);
+    setUser(user.username);
   };
   return (
     <div className="App">
@@ -82,9 +80,7 @@ const App = () => {
           </Nav>
         </div>
       </Navbar>
-      {/* <div className={alertClasses} role="alert">
-        {error}
-      </div> */}
+      {error ? <Alert variant="danger">{error}</Alert> : ""}
       <div className="container mt-4">
         <Switch>
           <Route

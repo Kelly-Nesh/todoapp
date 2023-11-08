@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9ei*00u=_6%=(3m#51+jh$()$bo$(j20sd11lv=x@&t$4jabi8'
+
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY", 'django-insecure-9ei*00u=_6%=(3m#51+jh$()$bo$(j20sd11lv=x@&t$4jabi8')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "False")
 
-ALLOWED_HOSTS = ['http://192.168.109.53:5173', '192.168.109.53']
+ALLOWED_HOSTS = ['http://192.168.109.53:5173',
+                 '192.168.109.53', 'todoapp.leetech.top']
 
 
 # Application definition
@@ -62,7 +67,7 @@ MIDDLEWARE = [
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://192.168.109.53:5173',
-    'http://192.168.109.53:8000',
+    'http://todoapp.leetech.top',
 ]
 ROOT_URLCONF = 'backend.urls'
 
@@ -84,7 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
+os.environ['DATABASE_URL'] = 'mysql://leetecht_todoapp:todoappPa$$w0rd@148.251.133.221:3306/leetecht_todoapp'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -145,3 +150,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)

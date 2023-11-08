@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import moment from "moment";
 
-const TodosList = (props) => {
+export const TodosList = (props) => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,6 @@ const TodosList = (props) => {
     TodoDataService.completeTodo(todoId, props.token)
       .then(() => {
         retrieveTodos();
-        console.log("completeTodo", todoId);
       })
       .catch((e) => {
         console.log(e);
@@ -110,4 +109,3 @@ const TodosList = (props) => {
     </Container>
   );
 };
-export default TodosList;

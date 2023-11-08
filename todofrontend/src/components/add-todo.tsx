@@ -39,20 +39,19 @@ const AddTodo = (props) => {
         data,
         props.token
       )
-        .then((response) => {
+        .then(() => {
           setSubmitted(true);
-          console.log(response.data);
         })
         .catch((e) => {
-          console.log(e);
+          console.log("updateTodo", e);
         });
     } else {
       TodoDataService.createTodo(data, props.token)
-        .then((response) => {
+        .then(() => {
           setSubmitted(true);
         })
         .catch((e) => {
-          console.log(e);
+          console.log("createTodo", e);
         });
     }
   };
